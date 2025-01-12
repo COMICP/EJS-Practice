@@ -22,6 +22,8 @@ app.set("layout", "./layouts/layout"); // not at views root
  * Routes
  *************************/
 app.use(static);
+// resources
+app.use( express.static( "public" ) );
 // Index route
 app.get("/", function (req, res) {
   res.render("index", { title: "home" });

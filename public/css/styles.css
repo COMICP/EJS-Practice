@@ -1,3 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+.jersey-15-regular {
+  font-family: "Jersey 15", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+p, a, li{
+  font-family: "Roboto Condensed";
+}
+h1, h2{
+  font-family: "Jersey 15", serif;
+  font-weight: 400;
+  font-size: 2rem;
+}
+
+
 /******* Change Box Model ***************/
 *,
 *:before,
@@ -5,30 +23,173 @@
   box-sizing: border-box;
 }
 body {
+  max-width: 1000px;
+  margin:0 auto;
+  padding: 10px;
+  
+}
+#top-header{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 2rem;
+  position: relative;
+}
+#top-header *{
+  display: inline-block;
+}
+#top-header div a{
+  text-decoration: none;
+  color: black;
+}
+#top-header div{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+/*Nav and Header*/
+
+nav{
+  width: 100%;
+}
+nav ul {
+  width: 100%;
+  list-style-type: none;
+  display: table;
   margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
 }
 
-#wrapper {
+
+nav ul li {
+  display: table-cell;
+  margin: auto;
+  padding: 0%;
+}
+nav a {
+  display: block;
+  background-color: rgb(41, 41, 41);
+  padding: 20px;
+  color: white;
+  margin: 0%;
+  text-align: center;
+  text-decoration: none;
+}
+nav a:hover{
+  background-color: #636363;
+}
+.siteName{
+  font-family: "Jersey 15", serif;
+  font-weight: 400;
+  
+}
+.siteName a{ 
+  text-decoration: none;
+  color: black;
+  font-size: 5rem;
+  font-family: "Jersey 15", serif;
+  font-weight: 400;
+}
+h1{
+  font-size: 3rem;
+}
+#wrapper{
+  padding: 0%;
+  margin: 0%;
+}
+/*Hero Div*/
+
+#herodiv{
+  position: relative;
+  width: 100%;
+}
+#herodiv img{
+  display: block;
+  margin: 0 auto;
+}
+#herodiv div{
+  position: absolute;
+  top: 10px;
+  left: 40px;
+  background-color: rgba(255, 255, 255, 0.777);
+}
+#herodiv div h2{
+  color: #01B0D3;
+  font-size: 2rem;
+}
+#herodiv div p{
+  color: #01B0D3;
+}
+#herodiv div a{
+  background-color: #01B0D3;
+  text-decoration: none;
+  color: black;
+  font-family: "Roboto Condensed"  ;
+  display: block;
+  margin:0 auto;
+  text-align: center;
+  padding: 10%;
+  width: 80%;
+}
+#reviewdiv li{
+  margin-top: 30px;
+}
+/*upgrades*/
+#upgrades{
+
+}
+#upgradediv{
+  display: grid;
+  grid-template-columns: auto auto;
+  margin: 0 auto;
+
+}
+#upgradediv div{
+  display: grid;
+  grid-template-columns: auto;
+
+}
+#upgradediv div *{
+  margin: 0 auto;
+}
+#upgrades img{
+  margin-top: 10px;
+}
+#upgradediv div div{
   width: 95%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-bottom: 1em;
+  height: 90px;
+  border-style: solid;
+  background-color: #01B0D3;
+
 }
-
-
 
 @media only screen and (min-width: 768px) {
-  body {
-    background-size: 100px 100px;
-    background-position: 0 0, 0 0, -50px -50px, 50px 50px;
-    
+  :root{
+    background-image: url("/images/site/checkerboard.jpg");
+  
+  }
+
+  body{
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #01B0D3;
+  }
+
+  #bottomcontent{
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+  #reviewdiv{
+    grid-column-start: 2;
+    grid-column-end: 3;
+  }
+  #upgrades{
+    grid-row-start: 1;
+    grid-row-end: 2;
   }
   
-  #wrapper {
-    border-radius: 10px;
-    margin-top: 1rem;
-    padding: 1vw;
-    width: 75vw;
-    max-width: 1200px;
-  }
+  
 }
