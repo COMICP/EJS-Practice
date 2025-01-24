@@ -19,4 +19,8 @@ invCont.buildByClassificationId = async function (req, res, next) {
   });
 };
 
+invCont.buildDetailsById = async function (req, res, next) {
+  const item_id = req.params.test
+};
+
 module.exports = invCont;
