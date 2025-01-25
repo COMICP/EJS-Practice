@@ -193,6 +193,20 @@ h1{
     grid-row-start: 1;
     grid-row-end: 2;
   }
-  
+  #detailspage{
+    display: grid;
+    grid-template-columns: 45% 10% 45%;
+  }
+  #detailsdiv{
+    grid-column-start: 3;
+    grid-column-end: 4;
+  }
+  #detailimg{
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+  #detailimg img{
+    width: 10px;
+  }
   
 }

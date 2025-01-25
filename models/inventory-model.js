@@ -33,7 +33,7 @@ async function getDetailsByItem(item_id) {
   try {
     const data = await pool.query(
       `SELECT * FROM public.inventory 
-      WHERE item_id = $1`,
+      WHERE inv_id = $1`,
       [item_id]
     );
     return data.rows;

@@ -77,9 +77,44 @@ Util.buildClassificationGrid = async function (data) {
 };
 
 Util.buildDetailsPage = async function (data) {
-  let page;
-  page += "<h1>test</h1>";
-  return page;
+  let page = '';
+  if (data) {
+    page +=  `
+    <div id = 'detailspage'>
+        <div id = 'detaiimg'>
+            <img src="${data.inv_image}" alt="${data.inv_make} ${data.inv_model} image">
+        </div>
+        <div id = 'detailsdiv'> 
+            <p>
+                Specs:
+            </p>
+            <ul>
+                <li>
+                    <p>Year: ${data.inv_year}</p>
+                </li>
+                <li>
+                    <p>Price: ${data.inv_price}</p>
+                </li> 
+                <li>
+                    <p>Miles: ${data.inv_miles}</p>
+                </li>
+                <li>
+                    <p>Color: ${data.inv_color}</p>
+                </li>
+            </ul>
+            <p>
+                Description:
+            </p>
+            <p>
+                ${data.inv_description}
+            </p>
+        </div>
+        </div>
+        `;
+  } else {
+    page += '<p class="notice">Sorry, no matching vehicles could be found.</p>';
+  }
+  return page; 
 };
 /* ****************************************
  * Middleware For Handling Errors
