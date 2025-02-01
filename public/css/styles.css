@@ -11,7 +11,7 @@ min-width: fit-content;
 p, a, li{
   font-family: "Roboto Condensed";
 }
-h1, h2{
+h1, h2, label{
   font-family: "Jersey 15", serif;
   font-weight: 400;
   font-size: 2rem;
@@ -165,6 +165,18 @@ h1{
   border-style: solid;
   background-color: #01B0D3;
 
+}
+
+#login{
+  width: fit-content;
+  padding: 20px;
+  margin: auto;
+  border: solid;
+  border-radius: 20px;
+
+}
+#login p{
+  text-align: center;
 }
 
 @media only screen and (min-width: 768px) {
