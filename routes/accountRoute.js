@@ -19,4 +19,11 @@ router.post(
   utilities.handleErrors(envController.registerAccount)
 );
 
+// Process the login attempt
+router.post("/login", (req, res) => {
+  regValidate.registationRules(),
+    regValidate.checkLoginData,
+    utilities.handleErrors(res.status(200).send("login process"));
+});
+
 module.exports = router;
