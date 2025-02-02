@@ -1,0 +1,44 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %>
+<form id="login" action="/account/register" method="post">
+  <label for="account_lastname">First Name:</label><br />
+  <input
+    required
+    type="text"
+    id="fname"
+    name="account_firstname"
+    value=""
+  /><br />
+  <label for="account_lastname">Last Name:</label><br />
+  <input
+    required
+    type="text"
+    id="email"
+    name="account_lastname"
+    value=""
+  /><br />
+
+  <label for="account_email">Email:</label><br />
+  <input required type="email" id="email" name="account_email" value="" /><br />
+  <label for="account_password">Password:</label><br />
+  <input
+    required
+    type="password"
+    id="password"
+    name="account_password"
+    value=""
+    required
+    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+  />
+  <br />
+  <span>
+    Passwords must be at least 12 characters <br />
+    and contain at least 1 number, <br />
+    1 capital letter, <br />
+    and 1 special character</span
+  >
+  <br /><br />
+
+  <input type="submit" value="Register" />
+</form>

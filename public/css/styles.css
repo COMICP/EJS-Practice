@@ -8,7 +8,7 @@ min-width: fit-content;
   font-weight: 400;
   font-style: normal;
 }
-p, a, li{
+p, a, li , span{
   font-family: "Roboto Condensed";
 }
 h1, h2, label{
