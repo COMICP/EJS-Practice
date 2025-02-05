@@ -9,8 +9,6 @@ async function getClassifications() {
   );
 }
 
-
-
 /* ***************************
  *  Get all inventory items and classification_name by classification_id
  * ************************** */
@@ -41,6 +39,76 @@ async function getDetailsByItem(item_id) {
     console.error("get error " + error);
   }
 }
+//register class
+async function registerSQLClass(classification_name) {
+  try {
+    const sql =
+      "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *";
+    return await pool.query(sql, [classification_name]);
+  } catch (error) {
+    return error.message;
+  }
+}
 
-module.exports = { getClassifications, getInventoryByClassificationId, getDetailsByItem };
+//Check Class Exists
+
+async function checkExistingClass(classification_name) {
+  try {
+    const sql = "SELECT * FROM classification WHERE classification_name = $1";
+    const email = await pool.query(sql, [classification_name]);
+    return email.rowCount;
+  } catch (error) {
+    return error.message;
+  }
+}
+async function checkExistingVehicle(classification_name) {
+  try {
+    const sql = "SELECT * FROM inv WHERE inv_model = $1";
+    const email = await pool.query(sql, [inv_model]);
+    return email.rowCount;
+  } catch (error) {
+    return error.message;
+  }
+}
+async function registerVehicle(
+  classification_id,
+  inv_make,
+  inv_model,
+  inv_description,
+  inv_image,
+  inv_thumbnail,
+  inv_price,
+  inv_year,
+  inv_miles,
+  inv_color
+
+) {
+  try {
+    const sql =
+      "INSERT INTO inventory (classification_id, inv_make,  inv_model,  inv_description,  inv_image,  inv_thumbnail,  inv_price,  inv_year,  inv_miles,  inv_color) VALUES ($1, $2, $3, $4,$5, $6, $7, $8, $9, $10) RETURNING *";
+    return await pool.query(sql, [
+      classification_id,
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color
+    ]);
+  } catch (error) {
+    return error.message;
+  }
+}
+module.exports = {
+  getClassifications,
+  getInventoryByClassificationId,
+  getDetailsByItem,
+  registerSQLClass,
+  checkExistingClass,
+  registerVehicle,
+  checkExistingVehicle
+};
 //Get individual item from inventory and return details

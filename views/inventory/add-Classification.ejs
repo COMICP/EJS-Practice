@@ -1,0 +1,22 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else { res.redirect('/') } %> <%- messages() %>
+
+    <form id="login" action="/inv/newClassification" method="post">
+        <label for="classification_name">Classification:</label><br />
+        <input
+          pattern="^\S+$"
+          required
+          type="text"
+          id="classification"
+          name="classification_name"
+          value=""
+        /><br /><br />
+        <% if (errors) { %>
+        <ul class="notice">
+          <% errors.array().forEach(error => { %>
+          <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+        <% } %>
+        <input type="submit" value="Submit Class" />

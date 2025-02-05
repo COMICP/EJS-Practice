@@ -77,9 +77,9 @@ Util.buildClassificationGrid = async function (data) {
 };
 
 Util.buildDetailsPage = async function (data) {
-  let page = '';
+  let page = "";
   if (data) {
-    page +=  `
+    page += `
     <div id = 'detailspage'>
         <div id = 'detaiimg'>
             <img src="${data.inv_image}" alt="${data.inv_make} ${data.inv_model} image">
@@ -114,7 +114,26 @@ Util.buildDetailsPage = async function (data) {
   } else {
     page += '<p class="notice">Sorry, no matching vehicles could be found.</p>';
   }
-  return page; 
+  return page;
+};
+
+Util.buildClassificationList = async function (classification_id = null) {
+  let data = await invModel.getClassifications();
+  let classificationList =
+    '<select name="classification_id" id="classificationList" required>';
+  classificationList += "<option value=''>Choose a Classification</option>";
+  data.rows.forEach((row) => {
+    classificationList += '<option value="' + row.classification_id + '"';
+    if (
+      classification_id != null &&
+      row.classification_id == classification_id
+    ) {
+      classificationList += " selected ";
+    }
+    classificationList += ">" + row.classification_name + "</option>";
+  });
+  classificationList += "</select>";
+  return classificationList;
 };
 /* ****************************************
  * Middleware For Handling Errors

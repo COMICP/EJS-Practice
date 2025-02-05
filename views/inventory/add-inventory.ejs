@@ -1,0 +1,102 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %> <%- messages() %>
+
+<form id="login" action="/inv/add-inventory" method="post">
+  <label for="classificationList">Vehicle Classes:</label>
+  <br />
+  <%- drop %>
+  <br />
+  <label for="inv_make">Make:</label><br />
+  <input
+    pattern="^\S+$"
+    required
+    type="text"
+    id="make"
+    name="inv_make"
+    value="<%= locals.inv_make %>"
+  /><br />
+  <label for="inv_model">Model:</label><br />
+  <input
+    pattern="^\S+$"
+    required
+    type="text"
+    id="Model"
+    name="inv_model"
+    value="<%= locals.inv_model %>"
+  /><br />
+  <label for="inv_description">Item Details:</label><br />
+  <textarea
+    pattern="^\S+$"
+    required
+    type="text"
+    id="inv_description"
+    name="inv_description"
+    value="<%= locals.inv_description %>"
+  ></textarea
+  ><br />
+  <label for="inv_image">Image Path:</label><br />
+  <input
+    pattern="^\S+$"
+    required
+    type="text"
+    id="inv_image"
+    name="inv_image"
+    value="/images/vehicles/no-image.jpg"
+  /><br />
+  <label for="inv_thumbnail">Thumbnail Path:</label><br />
+  <input
+    pattern="^\S+$"
+    required
+    type="text"
+    id="inv_thumbnail"
+    name="inv_thumbnail"
+    value="/images/vehicles/no-image.jpg"
+  /><br />
+  <label for="inv_price">Item Price:</label><br />
+  <input
+    pattern="\d*"
+    required
+    type="number"
+    id="inv_price"
+    name="inv_price"
+    value="<%= locals.inv_price %>"
+  /><br />
+  <label for="inv_year">Item Year:</label><br />
+  <input
+    pattern="\d*"
+    required
+    type="number"
+    id="inv_year"
+    name="inv_year"
+    value="<%= locals.inv_year %>"
+  /><br />
+  <label for="inv_miles">Item Milage:</label><br />
+  <input
+    pattern="\d*"
+    required
+    type="text"
+    id="inv_miles"
+    name="inv_miles"
+    value="<%= locals.inv_miles %>"
+  /><br />
+  <label for="inv_color">Item Color:</label><br />
+  <input
+    pattern="^\S+$"
+    required
+    type="text"
+    id="inv_color"
+    name="inv_color"
+    value="<%= locals.inv_color %>"
+  /><br />
+
+  <br /><br />
+  <% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+  <% } %>
+  <input type="submit" value="Submit vehicle" />
+</form>
