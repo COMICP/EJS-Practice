@@ -65,44 +65,43 @@ validate.InventoryRules = () => {
       .isLength({ min: 1 })
       .isAlpha()
       .withMessage("Provide a correct input. make"),
-      body("inv_model")
+    body("inv_model")
       .trim()
       .isLength({ min: 1 })
       .isAlpha()
       .withMessage("Provide a correct input. model"),
-      body("inv_description")
+    body("inv_description")
       .trim()
       .isLength({ min: 1 })
       .isAlpha()
       .withMessage("Provide a correct input. description"),
-      body("inv_image")
+    body("inv_image")
       .trim()
       .isLength({ min: 1 })
       .withMessage("Provide a correct input. image"),
-      body("inv_thumbnail")
+    body("inv_thumbnail")
       .isLength({ min: 1 })
       .withMessage("Provide a correct input. thumbnail"),
-      body("inv_price")
+    body("inv_price")
       .trim()
       .isLength({ min: 1 })
       .isHexadecimal()
       .withMessage("Provide a correct input. price"),
-      body("inv_year")
+    body("inv_year")
       .trim()
-      .isLength({ min: 4, max:4 })
+      .isLength({ min: 4, max: 4 })
       .isHexadecimal()
       .withMessage("Provide a correct input. year"),
-      body("inv_miles")
+    body("inv_miles")
       .trim()
       .isLength({ min: 1 })
       .isHexadecimal()
       .withMessage("Provide a correct input. miles"),
-      body("inv_color")
+    body("inv_color")
       .trim()
       .isLength({ min: 1 })
       .isString()
       .withMessage("Provide a correct input. color"),
-
   ];
 };
 
@@ -126,7 +125,8 @@ validate.checkClassificationData = async (req, res, next) => {
   next();
 };
 validate.checkItemData = async (req, res, next) => {
-  const {   classification_id,
+  const {
+    classification_id,
     inv_make,
     inv_model,
     inv_description,
@@ -135,10 +135,11 @@ validate.checkItemData = async (req, res, next) => {
     inv_price,
     inv_year,
     inv_miles,
-    inv_color } = req.body;
+    inv_color,
+  } = req.body;
   let errors = [];
   errors = validationResult(req);
-  let drop = await utilities.buildClassificationList()
+  let drop = await utilities.buildClassificationList();
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav();
     res.render("inventory/add-inventory", {
@@ -155,7 +156,48 @@ validate.checkItemData = async (req, res, next) => {
       inv_price,
       inv_year,
       inv_miles,
-      inv_color
+      inv_color,
+    });
+    return;
+  }
+  next();
+};
+
+validate.checkUpdeatedData = async (req, res, next) => {
+  const {
+    classification_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    inv_id,
+  } = req.body;
+  let errors = [];
+  errors = validationResult(req);
+  let drop = await utilities.buildClassificationList();
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    res.render("inventory/edit-inventory", {
+      errors,
+      title: "Edit Inventory",
+      nav,
+      drop,
+      classification_id,
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      inv_id,
     });
     return;
   }

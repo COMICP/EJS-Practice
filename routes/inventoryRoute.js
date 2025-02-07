@@ -22,14 +22,29 @@ router.get(
   utilities.handleErrors(invController.buildNewClass)
 );
 
-router.get("/add-inventory", utilities.handleErrors(invController.buildNewItem));
+router.get(
+  "/add-inventory",
+  utilities.handleErrors(invController.buildNewItem)
+);
+router.get(
+  "/getInventory/:classification_id",
+  utilities.handleErrors(invController.getInventoryJSON)
+);
+//edit item view
 
+router.get(
+  "/edit/:inv_id",
+  utilities.handleErrors(invController.editInventoryView)
+);
+router.get(
+  "/delete/:inv_id",
+  utilities.handleErrors(invController.deleteInventoryView)
+);
 router.post(
   "/newClassification",
   invRules.classificationRule(),
   invRules.checkClassificationData,
   utilities.handleErrors(invController.registerClass)
-
 );
 router.post(
   "/add-inventory",
@@ -37,4 +52,9 @@ router.post(
   invRules.checkItemData,
   utilities.handleErrors(invController.registerItem)
 );
+router.post("/edit/",
+  //invRules.InventoryRules(),
+  invRules.checkUpdeatedData,
+  utilities.handleErrors(invController.updateInventory));
+
 module.exports = router;

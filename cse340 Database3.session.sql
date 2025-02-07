@@ -1,2 +1,1 @@
-select *
-FROM inventory
+select * from classification
