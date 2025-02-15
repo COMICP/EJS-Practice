@@ -3,6 +3,16 @@ require("dotenv").config();
 const invModel = require("../models/inventory-model");
 const Util = {};
 
+//buildHeader
+Util.buildHeader = async function(req, res,next) {
+if (req.cookies.isLoggedIn) {
+
+    `<a title="Modify account" href="/account">welcome username</a>
+    <a title="Log out" href="/account/logout">logout</a>`
+    } else {
+  `<a title="Click to log in" href="/account/login">My Account</a>`
+ }
+}
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
@@ -180,4 +190,11 @@ Util.checkLogin = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
+// Function to check if the user is logged in
+Util.isLoggedIn = (req, res, next) => {
+  if (req.cookies.loggedIn) {
+    return true;
+  }
+  return false;
+};
 module.exports = Util;

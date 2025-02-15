@@ -36,10 +36,7 @@ router.get(
   "/edit/:inv_id",
   utilities.handleErrors(invController.editInventoryView)
 );
-router.get(
-  "/delete/:inv_id",
-  utilities.handleErrors(invController.deleteInventoryView)
-);
+router.get("/delete/:inv_id", utilities.handleErrors(invController.deleteItemView));
 router.post(
   "/newClassification",
   invRules.classificationRule(),
@@ -52,9 +49,15 @@ router.post(
   invRules.checkItemData,
   utilities.handleErrors(invController.registerItem)
 );
-router.post("/edit/",
+router.post(
+  "/edit/",
   //invRules.InventoryRules(),
   invRules.checkUpdeatedData,
-  utilities.handleErrors(invController.updateInventory));
+  utilities.handleErrors(invController.updateInventory)
+);
+router.post(
+  "/delete/",
+  utilities.handleErrors(invController.deleteItem)
+);
 
 module.exports = router;

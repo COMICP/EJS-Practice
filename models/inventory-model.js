@@ -21,6 +21,7 @@ async function getInventoryByClassificationId(classification_id) {
       WHERE i.classification_id = $1`,
       [classification_id]
     );
+
     return data.rows;
   } catch (error) {
     console.error("getclassificationsbyid error " + error);
@@ -103,6 +104,18 @@ async function registerVehicle(
   }
 }
 /* ***************************
+ *  Delete Inventory Item
+ * ************************** */
+async function deleteInventoryItem(inv_id) {
+  try {
+    const sql = 'DELETE FROM inventory WHERE inv_id = $1'
+    const data = await pool.query(sql, [inv_id])
+  return data
+  } catch (error) {
+    new Error("Delete Inventory Error")
+  }
+}
+/* ***************************
  *  Update Inventory Data
  * ************************** */
 async function updateInventory(
@@ -147,6 +160,7 @@ module.exports = {
   checkExistingClass,
   registerVehicle,
   checkExistingVehicle,
-  updateInventory
+  updateInventory,
+  deleteInventoryItem
 };
 //Get individual item from inventory and return details

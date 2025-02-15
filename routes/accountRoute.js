@@ -12,7 +12,11 @@ router.get(
 );
 router.get("/login", utilities.handleErrors(envController.buildLogin));
 // Process the registration data
-router.get("/", utilities.checkLogin, utilities.handleErrors(envController.buildAccount));
+router.get(
+  "/",
+  utilities.checkLogin,
+  utilities.handleErrors(envController.buildAccount)
+);
 router.post(
   "/register",
   regValidate.registationRules(),
@@ -26,6 +30,6 @@ router.post(
   // regValidate.loginRules(),
   // regValidate.checkLoginData,
   utilities.handleErrors(envController.accountLogin)
-)
+);
 
 module.exports = router;

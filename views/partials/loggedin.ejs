@@ -1,0 +1,8 @@
+<% if (loggedin) { %>
+
+    <a title="Modify account" href="/account">welcome <%-username%></a>
+    <a title="Log out" href="/account/logout">logout</a>
+    <%} else {%>
+    <a title="Click to log in" href="/account/login">My Account</a>
+
+    <% } %>
