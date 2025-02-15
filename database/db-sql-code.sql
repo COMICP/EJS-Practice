@@ -251,3 +251,11 @@ SET inv_description = REPLACE(
         'a huge interior'
     )
 WHERE inv_model = 'Hummer';
+
+CREATE TABLE reviews (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    review_text TEXT NOT NULL,
+    inv_id INT,
+    FOREIGN KEY (inv_id) REFERENCES inventory(inv_id)
+);

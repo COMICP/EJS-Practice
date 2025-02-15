@@ -67,21 +67,45 @@ invCont.editInventoryView = async function (req, res, next) {
     classification_id: itemData[0].classification_id,
   });
 };
+
+//build Details
 invCont.buildDetailsById = async function (req, res, next) {
   const itemID = req.params.inv_id;
+  const inv_id  = req.params.inv_id
   const data = await invModel.getDetailsByItem(itemID);
-  console.log(data[0]);
+  //console.log(data[0]);
   const details = await utilities.buildDetailsPage(data[0]);
-  console.log(details);
+  //console.log(details);
+  const reviews = await utilities.buildReviews(itemID)
   let nav = await utilities.getNav();
   const nameManufact = data[0].inv_make + " " + data[0].inv_model;
   res.render("./inventory/detail", {
     title: nameManufact,
     nav,
     details,
+    reviews,
+    inv_id,
+    errors: null,
   });
 };
+invCont.submitReview = async function(req, res){
 
+  const {
+    inv_id,
+    name,
+    review_text
+  } = req.body
+  const reviewsResults = await invModel.submitReview(name, review_text, inv_id)
+
+
+  if (reviewsResults) {
+    req.flash("notice", `Congratulations, you\'ve submitted your review. `);
+    res.status(201).redirect(`./detail/${inv_id}`);
+  } else {
+    req.flash("notice", "Sorry, the review failed.");
+    res.status(501).redirect(`./detail/${inv_id}`);
+  }
+}
 invCont.buildManagement = async function (req, res, next) {
   let nav = await utilities.getNav();
   const classificationSelect = await utilities.buildClassificationList();

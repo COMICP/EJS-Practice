@@ -1,1 +1,3 @@
-select * from classification
+
+
+SELECT* FROM inventory
