@@ -137,6 +137,29 @@ async function updateInventory(
     return data.rows[0]
   } catch (error) {
     console.error("model error: " + error)
+  } 
+}
+
+
+async function submitReview(name, review_text, inv_id) {
+  try {
+    const sql = `INSERT INTO reviews (name, review_text, inv_id)  VALUES ($1, $2, $3)  RETURNING *;`;
+    return await pool.query(sql, [name, review_text, inv_id]);
+  } catch (error) {
+    return error.message;
+  }
+}
+
+async function getReviews(inv_id){
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.reviews 
+      WHERE inv_id = $1`,
+      [inv_id]
+    );
+    return data.rows;
+  } catch (error) {
+    console.error("get error " + error);
   }
 }
 module.exports = {
@@ -147,6 +170,8 @@ module.exports = {
   checkExistingClass,
   registerVehicle,
   checkExistingVehicle,
-  updateInventory
+  updateInventory,
+  getReviews,
+  submitReview
 };
 //Get individual item from inventory and return details

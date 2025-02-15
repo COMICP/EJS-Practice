@@ -57,4 +57,11 @@ router.post("/edit/",
   invRules.checkUpdeatedData,
   utilities.handleErrors(invController.updateInventory));
 
+router.post("/submit-review",
+  
+  invRules.revrule(),
+  invRules.checkReviewData,
+  utilities.handleErrors(invController.submitReview)
+)
+
 module.exports = router;

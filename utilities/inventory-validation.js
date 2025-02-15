@@ -203,4 +203,45 @@ validate.checkUpdeatedData = async (req, res, next) => {
   }
   next();
 };
+validate.checkReviewData = async (req, res, next) => {
+  
+  let errors = [];
+  errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    const itemID = req.body.inv_id;
+    const inv_id = req.body.inv_id;
+    const data = await invModel.getDetailsByItem(itemID);
+    console.log(itemID)
+    console.log(data)
+    //console.log(data[0]);
+    const details = await utilities.buildDetailsPage(data[0]);
+    //console.log(details);
+    const reviews = await utilities.buildReviews(itemID);
+    let nav = await utilities.getNav();
+    const nameManufact = data[0].inv_make + " " + data[0].inv_model;
+    res.render("./inventory/detail", {
+      title: nameManufact,
+      nav,
+      details,
+      reviews,
+      inv_id,
+      errors,
+    });
+    return;
+  }
+  next();
+};
+validate.revrule = () => {
+  console.log("checking results");
+  return [
+
+    body("name")
+      .isLength({ min: 1 })
+      .withMessage("Provide a correct name."),
+    body("review_text")
+      .isLength({ min: 1 })
+      .withMessage("Provide review text."),
+  ];
+};
 module.exports = validate;

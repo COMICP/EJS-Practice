@@ -174,10 +174,33 @@ Util.checkJWTToken = (req, res, next) => {
  * ************************************ */
 Util.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) {
-    next()
+    next();
   } else {
-    req.flash("notice", "Please log in.")
-    return res.redirect("/account/login")
+    req.flash("notice", "Please log in.");
+    return res.redirect("/account/login");
   }
- }
+};
+
+//get reviews
+Util.buildReviews = async function (inv_id) {
+  let data = await invModel.getReviews(inv_id);
+  let grid;
+  if (data.length > 0) {
+    grid = '<ul id="reviews">';
+    data.forEach((review) => {
+      grid +=
+      `
+      <li>
+      <h3>${review.name}: </h3>
+      <p>${review.review_text}</p>
+      </li>
+      `;
+    });
+    grid += "</ul>";
+  } else {
+    grid += '<p class="notice">No reviews avaliable.</p>';
+  }
+  return grid;
+};
+
 module.exports = Util;
